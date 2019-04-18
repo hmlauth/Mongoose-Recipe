@@ -44,6 +44,8 @@ app.get("/scrape", (req, res) => {
 
         const $ = cheerio.load(html.data);
 
+        var scrapedRecipes = [];
+        
         $(".listicle-page").each( (i, e) => {
             
             var recipe = {};
@@ -55,18 +57,28 @@ app.get("/scrape", (req, res) => {
 
             
             console.log(recipe);
+            scrapedRecipes.push(recipe);
             
-            db.Cookbook.create(recipe)
-                .then( 
-                    dbCookbook => res.render('scrape', {recipe: dbCookbook})
-                ).catch (
-                    err => console.log("err", err))
-            })
+            // use res.json(recipe)
+
+            // db.Cookbook.create(recipe)
+            // .then(
+            //     dbCookbook => res.render('scrape', {recipe: dbCookbook})
+            // )
+            // .catch (
+            //     err => console.log("err", err))
+            // })
 
         });
 
-    });
+        res.render('scrape', {recipe: scrapedRecipes})
 
+    });
+});
+
+    // app.post("/saved", (req, res) => {
+        // use create here
+    // })
 
 // Route to grab all recipes from db
 // app.get('/allrecipes', (req, res) => {
