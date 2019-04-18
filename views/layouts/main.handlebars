@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/materia/bootstrap.min.css"/>
   <link href="https://fonts.googleapis.com/css?family=Cormorant+SC" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/style.css">
     <title>Recipe Scraper</title>
 
     <style>
@@ -16,6 +15,18 @@
             background-image: url("https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
         }
 
+        .btn {
+            background-color: blue;
+            color: whitesmoke
+        }
+
+        .article-container {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: space-around;
+    
+        }
     </style>
 
 </head>
@@ -35,15 +46,15 @@
           <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li class="nav-item">
+      {{!-- <li class="nav-item">
         <a class="nav-link" href="/saved">Saved Recipes</a>
-      </li>
+      </li> --}}
       <li class="nav-item">
-        <a class="btn btn-danger scrape-new">SCRAPE NEW RECIPES!</a>
+        <a class="btn scrape-new" href="/scrape">SCRAPE NEW RECIPES!</a>
       </li>
-      <li class="nav-item">
-        <a class="btn btn-danger clear">CLEAR RECIPES!</a>
-      </li>
+      {{!-- <li class="nav-item">
+        <a class="btn clear" href="/clear">CLEAR RECIPES!</a>
+      </li> --}}
     </ul>
   </div>
 </nav>
@@ -73,7 +84,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
-<script src="/assets/javascript/index.js"></script>
 
 </body>
 

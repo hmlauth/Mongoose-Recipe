@@ -30,56 +30,50 @@ app.set("view engine", "handlebars");
 // Connect to the Mongo DB - 'recipeScraper'
 mongoose.connect("mongodb://localhost/recipeScraper", { useNewUrlParser: true });
 
-// Routes
+// Back-End Routes
 
 app.get("/", (req, res) => {
     res.render("index")
 })
+
 // a GET route scraping the divaliciousrecipes site
 app.get("/scrape", (req, res) => {
 
     // Make a request via axios to grab the HTML body from the site of your choice
     axios.get("https://www.tasteofhome.com/collection/our-100-highest-rated-recipes-ever/").then( html => {
 
-        // console.log(html);
         const $ = cheerio.load(html.data);
 
-        // const listicleCard = $(".listicle-page");
-        // console.log(listicleCard.html());
-        // console.log(listicleCard.text());
-        // const cardHeadings = listicleCard.find('h4').text();
-        // find and children are similar in that they find html element within the selected 'parent' html element.
-        // const cardHeadings = listicleCard.children('h4').text()
-        // console.log(cardHeadings);
-
         $(".listicle-page").each( (i, e) => {
+            
             var recipe = {};
 
             recipe.title = $(e).find('h4 a').text();
             recipe.summary = $(e).find('.listicle-page__content').text();
             recipe.link = $(e).find('h4 a').attr('href');
             recipe.img = $(e).find('.image-wrapper a img').attr('src');
-            // console.log("Recipe Title", recipeTitle);
-            // console.log("Recipe Desc", recipeDes);
-            // console.log("Recipe Link", recipeLink);
-            // console.log("Recipe Img", recipeImgSrc);
 
-            console.log("Recipe", recipe);
-
+            
+            console.log(recipe);
+            
             db.Cookbook.create(recipe)
-            .then( dbCookbook => 
-                console.log("dbCookbook", dbCookbook)
-            ).catch (err => 
-                console.log(err)
-            )
-        })
+                .then( 
+                    dbCookbook => res.render('scrape', {recipe: dbCookbook})
+                ).catch (
+                    err => console.log("err", err))
+            })
+
         });
-        
-        res.send("Scrape Complete");
-    })
+
+    });
 
 
-
+// Route to grab all recipes from db
+// app.get('/allrecipes', (req, res) => {
+//     db.Cookbook.find({})
+//     .then(dbCookbook => res.json(dbCookbook))
+//     .catch(err => res.json(err))
+// });
 
 // Start the server
 app.listen(PORT, function () {

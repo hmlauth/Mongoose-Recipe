@@ -11,10 +11,18 @@ var CookbookSchema = new Schema({
     type: String,
     required: true
   },
+  summary: {
+      type: String,
+      required: true
+  },
   // `link` is required and of type String
   link: {
     type: String,
     required: true
+  },
+  img: {
+      type: String,
+      required: true
   },
   // `Recipe` is an object that stores a Recipe id
   // The ref property links the ObjectId to the Recipe model

@@ -8,8 +8,6 @@ var Schema = mongoose.Schema;
 var RecipeSchema = new Schema({
   title: String,
   summary: String,
-  link: String,
-  img: String,
 });
 
 // This creates our model from the above schema, using mongoose's model method

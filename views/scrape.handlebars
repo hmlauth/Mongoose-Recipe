@@ -1,0 +1,10 @@
+{{#each recipe}}
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="{{this.img}}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title" href="{{this.link}}">{{this.title}}</h5>
+    <p class="card-text">{{this.summary}}</p>
+    <a href="/saved" class="btn btn-primary" data-_id="{{this._id}}">Save Recipe</a>
+  </div>
+</div>
+{{/each}}
