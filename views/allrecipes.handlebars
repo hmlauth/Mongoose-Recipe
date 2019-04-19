@@ -1,0 +1,11 @@
+{{#each recipe}}
+<div class="media">
+  <img src="{{this.img}}" class="mr-3" alt="{{this.title}}">
+  <div class="media-body">
+    <h5 class="mt-0" data-link="{{this.link}}">{{this.title}}</h5>
+   {{this.summary}}
+  </div>
+</div>
+{{/each}}
+
+{{!-- <h1> HELLO WORLD </h1> --}}

@@ -64,6 +64,7 @@ app.get("/scrape", (req, res) => {
         res.render('scrape', {recipe: scrapedRecipes})
 
     }).catch(err => console.log(err));
+
 });
 
 app.post("/saved", (req, res) => {
@@ -71,17 +72,17 @@ app.post("/saved", (req, res) => {
     // create a 'Cookbook' using the 'savedRecipe' object sent via post request from the front-end. 
     db.Cookbook.create(req.body)
     // view the added result in the console.
-    .then (dbCookbook => console.log(dbCookbook))
+    .then (dbCookbook => console.log("Successfully Saved!"))
     .catch (err => console.log("err", err))
 
 })
 
 // Route to grab all recipes from db
-// app.get('/allrecipes', (req, res) => {
-//     db.Cookbook.find({})
-//     .then(dbCookbook => res.json(dbCookbook))
-//     .catch(err => res.json(err))
-// });
+app.get('/allrecipes', (req, res) => {
+    db.Cookbook.find({})
+    .then(dbCookbook => res.render('allrecipes', {recipe: dbCookbook}))
+    .catch(err => res.json(err))
+});
 
 // Start the server
 app.listen(PORT, function () {
