@@ -30,11 +30,11 @@ app.set("view engine", "handlebars");
 // Connect to the Mongo DB - 'recipeScraper'
 mongoose.connect("mongodb://localhost/recipeScraper", { useNewUrlParser: true });
 
-// Back-End Routes
+// ROUTES
 
 app.get("/", (req, res) => {
     res.render("index")
-})
+});
 
 // a GET route scraping the divaliciousrecipes site
 app.get("/scrape", (req, res) => {
@@ -45,40 +45,36 @@ app.get("/scrape", (req, res) => {
         const $ = cheerio.load(html.data);
 
         var scrapedRecipes = [];
-        
+        // console.log(scrapedRecipes);
+
         $(".listicle-page").each( (i, e) => {
             
             var recipe = {};
-
+            recipe.id = $(e).find(".listicle-page__count-current").text();
             recipe.title = $(e).find('h4 a').text();
             recipe.summary = $(e).find('.listicle-page__content').text();
             recipe.link = $(e).find('h4 a').attr('href');
             recipe.img = $(e).find('.image-wrapper a img').attr('src');
 
-            
-            console.log(recipe);
+            // console.log(recipe);
             scrapedRecipes.push(recipe);
-            
-            // use res.json(recipe)
-
-            // db.Cookbook.create(recipe)
-            // .then(
-            //     dbCookbook => res.render('scrape', {recipe: dbCookbook})
-            // )
-            // .catch (
-            //     err => console.log("err", err))
-            // })
 
         });
 
         res.render('scrape', {recipe: scrapedRecipes})
 
-    });
+    }).catch(err => console.log(err));
 });
 
-    // app.post("/saved", (req, res) => {
-        // use create here
-    // })
+app.post("/saved", (req, res) => {
+
+    // create a 'Cookbook' using the 'savedRecipe' object sent via post request from the front-end. 
+    db.Cookbook.create(req.body)
+    // view the added result in the console.
+    .then (dbCookbook => console.log(dbCookbook))
+    .catch (err => console.log("err", err))
+
+})
 
 // Route to grab all recipes from db
 // app.get('/allrecipes', (req, res) => {

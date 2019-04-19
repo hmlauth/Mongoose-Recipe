@@ -22,14 +22,14 @@ var CookbookSchema = new Schema({
   },
   img: {
       type: String,
-      required: true
+      required: false
   },
-  // `Recipe` is an object that stores a Recipe id
-  // The ref property links the ObjectId to the Recipe model
-  // This allows us to populate the Cookbook with an associated Recipe
-  recipe: {
+  // `Notes` is an object that stores a Notes id
+  // The ref property links the ObjectId to the Notes model
+  // This allows us to populate the Cookbook with an associated Notes
+  notes: {
     type: Schema.Types.ObjectId,
-    ref: "Recipe"
+    ref: "Notes"
   }
 });
 

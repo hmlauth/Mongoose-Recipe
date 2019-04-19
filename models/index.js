@@ -1,6 +1,6 @@
 
 module.exports = {
     Cookbook: require("./Cookbook"),
-    Recipe: require("./Recipe")
+    Notes: require("./Notes")
   };
   
