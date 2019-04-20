@@ -1,11 +1,38 @@
+
+
 {{#each recipe}}
-<div class="media">
-  <img src="{{this.img}}" class="mr-3" alt="{{this.title}}">
-  <div class="media-body">
-    <h5 class="mt-0" data-link="{{this.link}}">{{this.title}}</h5>
-   {{this.summary}}
+<div class="card" style="width: 18rem;">
+  <!-- Modal -->
+<div class="modal fade" id="myModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Notes for {{this.title}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea class="new-note" placeholder="Enter note" rows="4"></textarea>
+        <hr>
+        <ul class="list-group note-container"></ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
   </div>
 </div>
+  <img class="card-img-top" src="{{this.img}}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title" href="{{this.link}}">{{this.title}}</h5>
+    <p class="card-text">{{this.summary}}</p>
+    <button type="button" class="btn add-note" data-toggle="modal" data-target="#myModal{{this.id}}">Add Note</button>
+  </div>
+</div> 
 {{/each}}
 
-{{!-- <h1> HELLO WORLD </h1> --}}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="./app.js"></script>
