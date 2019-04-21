@@ -7,10 +7,6 @@ var Schema = mongoose.Schema;
 // This is similar to a Sequelize model
 var NotesSchema = new Schema({
   comment: String
-  // recipe: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'Cookbook'
-  // }
 });
 
 // This creates our model from the above schema, using mongoose's model method
