@@ -73,6 +73,20 @@ $(document).on('click', ".save-note", function () {
     });
 });
 
+$(document).on('click', ".delete-recipe", function() {
+    event.preventDefault();
+
+    var id = $(this).attr('data-id');
+    $(this).closest(".card").remove();
+
+    $.ajax({
+        method: "DELETE",
+        url: "/deleterecipe/" + id,
+    }).then(res => {
+        console.log("Recipe deleted!", res);
+    });
+});
+
 // helper function to add notes to recipe
 function listNote(id, comment) {
     var noteContainer = $(".note-container");
