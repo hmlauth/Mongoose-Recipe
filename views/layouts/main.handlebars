@@ -1,98 +1,118 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/materia/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/materia/bootstrap.min.css" />
   <link href="https://fonts.googleapis.com/css?family=Cormorant+SC" rel="stylesheet">
-    <title>Recipe Scraper</title>
+  <title>Recipe Scraper</title>
 
-    <style>
+  <style>
 
-        .jumbotron {
-            background-image: url("https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-        }
+    body {
+      position: relative
+    }
 
-        .btn {
-            background-color: blue;
-            color: whitesmoke
-        }
+    .jumbotron {
+      background-image: url("https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    }
 
-        .article-container {
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: row;
-            justify-content: space-around;
-            margin-bottom: 10px;
-        }
+    .btn {
+      background-color: blue;
+      color: whitesmoke
+    }
 
-        ul {
-          list-style-type: none;
-        }
-        
-        .new-note {
-              width: 100%;
-        }
+    .article-container {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-around;
+      margin-bottom: 10px;
+    }
 
-    </style>
+    ul {
+      list-style-type: none;
+    }
+
+    .new-note {
+      width: 100%;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 80px;
+      color: white;
+      background-color: #2196f3;
+    }
+
+    footer .container {
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  </style>
 
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="/">Recipe Scraper</a>
-  <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false"
-    aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <a class="navbar-brand" href="/">Recipe Scraper</a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link all-recipes" href="/allrecipes">Saved Recipes</a>
-      </li>
-      <li class="nav-item">
-        <a class="btn scrape-new" href="/scrape">SCRAPE NEW RECIPES!</a>
-      </li>
-      {{!-- <li class="nav-item">
-        <a class="btn clear" href="/clear">CLEAR RECIPES!</a>
-      </li> --}}
-    </ul>
-  </div>
-</nav>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link all-recipes" href="/allrecipes">Saved Recipes</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn scrape-new" href="/scrape">SCRAPE NEW RECIPES!</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn clear" href="/clearall">CLEAR RECIPES!</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-<div class="jumbotron text-center">
-  <div class="overlay">
+  <div class="jumbotron text-center">
+    <div class="overlay">
+    </div>
+    <div class="background-image">
+    </div>
+    <div class="caption">
+      <h1>Recipe Scraper</h1>
+      <p>Taste of Home Edition</p>
+    </div>
   </div>
-  <div class="background-image">
-  </div>
-  <div class="caption">
-    <h1>Recipe Scraper</h1>
-    <p>Taste of Home Edition</p>
-  </div>
-</div>
-<div class="container-fluid article-container">
-  
- {{{ body }}}
-   
-</div>
 
-<footer class="footer">
-  <div class="container">
-    <p>Recipe Scraper</p>
-  </div>
-</footer>
+  <div class="container-fluid article-container">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+    {{{ body }}}
+
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Recipe Scraper</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 
 </body>
 

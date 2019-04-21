@@ -1,4 +1,3 @@
-console.log('hello');
 
 $(document).on("click", ".save-recipe", function () {
     event.preventDefault();
@@ -21,7 +20,6 @@ $(document).on("click", ".save-recipe", function () {
 
 });
 
-// populate add note modal with previous notes already saved. Query will use the unique recipe ID and it's associated notes
 $(document).on('click', '.add-note', function () {
     event.preventDefault();
 
@@ -96,11 +94,22 @@ $(document).on('click', ".delete-recipe", function() {
     });
 });
 
+$(document).on('click',".clear", function() {
+    event.preventDefault();
+    $.ajax({
+        method: "DELETE",
+        url: "/clearall"
+    }).then(res => {
+        console.log("Recipes cleared", res)
+        $(".article-container").empty();
+    })
+})
+
 // helper function to add notes to recipe
 function listNote(id, comment) {
     var noteContainer = $(".note-container");
     var button = $("<button class='btn delete-note' data-id=" + id + ">X</button>");
-    var li = $("<li>" + comment + "</li>");
+    var li = $("<li class='note-comment'>" + comment + "</li>");
     li.prepend(button);
     noteContainer.append(li);
 }

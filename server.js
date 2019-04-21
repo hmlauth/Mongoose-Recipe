@@ -36,6 +36,10 @@ app.get("/", (req, res) => {
     res.render("index")
 });
 
+// app.get("/clear", (req, res) => {
+//     res.render("cleared")
+// })
+
 // a GET route scraping the divaliciousrecipes site
 app.get("/scrape", (req, res) => {
 
@@ -100,7 +104,6 @@ app.post('/addnote/:id', (req, res) => {
     .catch(err => res.json(err));
 });
 
-// route for populating notes associated with recipe
 app.get('/addnote/:id', (req, res) => {
     db.Cookbook.find({_id: req.params.id})
     .populate("notes")
@@ -116,7 +119,17 @@ app.delete('/deletenote/:id', (req, res) => {
     db.Notes.remove({_id: req.params.id})
     .then(dbNote => res.json(dbNote))
 })
-// Start the server
+
+app.delete('/clearall', (req, res) => {
+    db.Cookbook.remove({})
+    .then(dbCookbook => {
+        console.log("Cleared Response", res);
+        res.json(dbCookbook)
+    })
+    .catch(err => console.log(err))
+});
+
+// Start server
 app.listen(PORT, function () {
     console.log("App running on port " + PORT + "!");
 });
