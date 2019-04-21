@@ -90,29 +90,22 @@ app.post('/addnote/:id', (req, res) => {
     db.Notes.create(req.body) 
     .then( dbNotes => {
         console.log('dbNotes', dbNotes);
-        var id = req.params.id;
-        return db.Cookbook.findOneAndUpdate( {}, {$push: {note: dbNotes.id} }, {new: true}
+        return db.Cookbook.findOneAndUpdate( 
+            { _id: req.params.id }, 
+            {$push: {notes: dbNotes._id} }, 
+            {new: true}
         )
     })
-    .then(function(dbCookbook) {
-        console.log("dbCookbook", dbCookbook);
-        res.json(dbCookbook)
-    })
-    .catch(err => {
-        res.json(err)
-    });
+    .then( dbCookbook => res.json(dbCookbook))
+    .catch(err => res.json(err));
 });
 
 // route for populating notes associated with recipe
 app.get('/addnote/:id', (req, res) => {
-    db.Cookbook.findOne({_id: req.params.id})
+    db.Cookbook.find({_id: req.params.id})
     .populate("notes")
-    .then(dbCookbook => {
-        console.log('populate dbCookbook', dbCookbook);
-        res.json(dbCookbook)
-    })
-    .catch(err => res.json(err))
-})
+    .then( dbCookbook => res.json(dbCookbook))
+});
 
 // Start the server
 app.listen(PORT, function () {

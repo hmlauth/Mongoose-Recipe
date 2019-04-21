@@ -27,14 +27,14 @@ var CookbookSchema = new Schema({
   // `Notes` is an object that stores a Notes id
   // The ref property links the ObjectId to the Notes model
   // This allows us to populate the Cookbook with an associated Notes
-  notes: {
+  notes: [{
     type: Schema.Types.ObjectId,
     ref: "Notes"
-  }
+  }]
 });
 
 // This creates our model from the above schema, using mongoose's model method
-var Cookbook = mongoose.model("Cookbook", CookbookSchema);
+const Cookbook = mongoose.model("Cookbook", CookbookSchema);
 
 // Export the Cookbook model
 module.exports = Cookbook;

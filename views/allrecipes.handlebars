@@ -28,7 +28,7 @@
     <h5 class="card-title" href="{{this.link}}">{{this.title}}</h5>
     <p class="card-text">{{this.summary}}</p>
     <button type="button" class="btn add-note" data-toggle="modal" data-target="#myModal{{this.id}}" data-id={{this.id}}>Add Note</button>
-    <button type="button" class="btn delete-recipe" data-id={{this.id}}>Delete</button>
+    <button type="button" class="btn delete-recipe" data-id={{this.title}}>Delete</button>
   </div>
 </div> 
 {{/each}}
