@@ -25,25 +25,22 @@ $(document).on("click", ".save-recipe", function () {
 $(document).on('click', '.add-note', function () {
     event.preventDefault();
 
-    var thisId = $(this).attr('data-id');
-    console.log(thisId);
+    var id = $(this).attr('data-id');
+    console.log(id);
 
     $.ajax({
         method: "GET",
-        url: '/addnote/' + thisId,
+        url: '/addnote/' + id,
     }).then(res => {
-        const id = res[0]._id;
+        console.log(res);
         const notes = res[0].notes;
         console.log('POPULATED!', notes);
         for (let i = 0; i < notes.length; i++) {
+            const id = notes[i]._id;
             const comment = notes[i].comment;
-
             listNote(id, comment);
-
         }
-
     });
-
 });
 
 $(document).on('click', ".save-note", function () {
@@ -57,10 +54,7 @@ $(document).on('click', ".save-note", function () {
     var comment = modalBody.find("textarea").val();
     modalBody.find('textarea').val("");
 
-    listNote(id, comment);
-
     var addNote = {
-        title: modalTitle,
         comment: comment
     };
 
@@ -69,9 +63,24 @@ $(document).on('click', ".save-note", function () {
         url: "/addnote/" + id,
         data: addNote
     }).then(res => {
-        console.log("Note added!", res);
+        console.log("Note added!", res.notes);
     });
 });
+
+$(document).on('click',".delete-note", function () {
+    event.preventDefault();
+
+    var id = $(this).attr('data-id');
+    $(this).closest("li").remove();
+
+    $.ajax({
+        method: "DELETE",
+        url: "/deletenote/" + id,
+    }).then(res => {
+        console.log("Note deleted!", res);
+    });
+
+})
 
 $(document).on('click', ".delete-recipe", function() {
     event.preventDefault();
@@ -90,7 +99,7 @@ $(document).on('click', ".delete-recipe", function() {
 // helper function to add notes to recipe
 function listNote(id, comment) {
     var noteContainer = $(".note-container");
-    var button = $("<button class='btn delete-button' data-id=" + id + ">X</button>");
+    var button = $("<button class='btn delete-note' data-id=" + id + ">X</button>");
     var li = $("<li>" + comment + "</li>");
     li.prepend(button);
     noteContainer.append(li);

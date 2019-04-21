@@ -109,9 +109,13 @@ app.get('/addnote/:id', (req, res) => {
 
 app.delete('/deleterecipe/:id', (req, res) => {
     db.Cookbook.remove({_id: req.params.id})
-    .then(dbCookbook => console.log(dbCookbook))
+    .then(dbCookbook => res.json(dbCookbook))
 });
 
+app.delete('/deletenote/:id', (req, res) => {
+    db.Notes.remove({_id: req.params.id})
+    .then(dbNote => res.json(dbNote))
+})
 // Start the server
 app.listen(PORT, function () {
     console.log("App running on port " + PORT + "!");
