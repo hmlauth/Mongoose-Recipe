@@ -83,8 +83,12 @@ app.post("/saved", (req, res) => {
 
 // Route to grab all recipes from db
 app.get('/allrecipes', (req, res) => {
+    console.log("Route entered");
     db.Cookbook.find({})
-    .then(dbCookbook => res.render('allrecipes', {recipe: dbCookbook}))
+    .then(dbCookbook => {
+        console.log("Response received");
+        res.render('allrecipes', {recipe: dbCookbook})}
+        )
     .catch(err => res.json(err))
 });
 
