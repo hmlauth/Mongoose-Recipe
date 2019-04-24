@@ -120,11 +120,11 @@ app.delete('/deletenote/:id', (req, res) => {
     .then(dbNote => res.json(dbNote))
 })
 
-app.delete('/clearall', (req, res) => {
+app.get('/clearall', (req, res) => {
     db.Cookbook.remove({})
     .then(dbCookbook => {
-        console.log("Cleared Response", res);
-        res.json(dbCookbook)
+        console.log("Cleared Response", dbCookbook);
+        res.render("cleared");
     })
     .catch(err => console.log(err))
 });

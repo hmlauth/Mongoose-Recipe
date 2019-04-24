@@ -94,17 +94,6 @@ $(document).on('click', ".delete-recipe", function() {
     });
 });
 
-$(document).on('click',".clear", function() {
-    event.preventDefault();
-    $.ajax({
-        method: "DELETE",
-        url: "/clearall"
-    }).then(res => {
-        console.log("Recipes cleared", res)
-        $(".article-container").empty();
-    })
-})
-
 // helper function to add notes to recipe
 function listNote(id, comment) {
     var noteContainer = $(".note-container");
