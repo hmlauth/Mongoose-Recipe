@@ -28,7 +28,13 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Connect to the Mongo DB - 'recipeScraper'
-mongoose.connect("mongodb://localhost/recipeScraper", { useNewUrlParser: true });
+var databaseUri = 'mongodb://localhost/recipeScraper';
+
+if (process.env.MONGODB_URI) {
+    mongoose.connect(process.env.MONGODB_URI);
+} else {
+    mongoose.connect(databaseUri)
+}
 
 // ROUTES
 
@@ -86,7 +92,7 @@ app.get('/allrecipes', (req, res) => {
     console.log("Route entered");
     db.Cookbook.find({})
     .then(dbCookbook => {
-        console.log("Response received");
+        console.log("Response received")
         res.render('allrecipes', {recipe: dbCookbook})}
         )
     .catch(err => res.json(err))
